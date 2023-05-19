@@ -1,0 +1,66 @@
+{% extends "main/base.html" %}
+{% block title %}Dodawanie posta{% endblock %}
+{% block content %}
+<form method="post">
+{% csrf_token %}
+<div class="row">
+    <div class="col"></div>
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+
+                        <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Tytuł</span>
+                        <input name="title" type="text" class="form-control" placeholder="Wpisz tytuł posta" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+
+                    </li>
+                    <li class="list-group-item">
+
+
+
+                        <div class="input-group">
+                          <span class="input-group-text">Zawartość posta</span>
+                          <textarea name="content" rows="10" class="form-control" aria-label="With textarea"></textarea>
+                        </div>
+
+
+                    </li>
+                    <li class="list-group-item">
+                        <div class="form-check form-switch">
+                          <input name="published" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                          <label class="form-check-label" for="flexSwitchCheckDefault">Opublikowany</label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="form-check form-switch">
+                          <input name="sponsored" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
+                          <label class="form-check-label" for="flexSwitchCheckDefault1">Sponsorowany</label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                    <select name="author_id" class="form-select" aria-label="Default select example">
+                      <option selected value="0">Wybierz autora</option>
+                        {% for user in users %}
+                          <option value="{{ user.id }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+                    </li>
+                    <li class="list-group-item">
+                        <input type="submit" value="Dodaj">
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{% url 'posts:list' %}">Powrót do listy postów</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
+</form>
+
+{% endblock %}
+
